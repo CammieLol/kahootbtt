@@ -1,0 +1,22 @@
+//Set the number of bots desired
+let numBots = 10;
+
+//Create the bots
+for (let i = 0; i < numBots; i++) {
+  let bot = new Kahoot.Bot();
+  bot.join(4517097);
+  bot.on("quizStart", quizStart);
+}
+
+//Event handler for when the quiz starts
+function quizStart() {
+  let answers = [1,2,3,4];
+
+  this.on("questionStart", questionStart);
+  
+  //Event handler for when a new question starts
+  function questionStart(question) {
+    let randomAnswer = answers[Math.floor(Math.random() * answers.length)];
+    this.answer(question.id, randomAnswer);
+  }
+}
